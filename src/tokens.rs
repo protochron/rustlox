@@ -1,6 +1,6 @@
 use std::fmt::{Display, Formatter};
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub enum TokenType {
     LeftParen,
     RightParen,
@@ -47,14 +47,24 @@ pub enum TokenType {
     EOF,
 }
 
+#[derive(Debug)]
 pub struct Token {
-    token_type: TokenType,
-    lexeme: String,
-    line: i64,
+    pub token_type: TokenType,
+    pub lexeme: Vec<u8>,
+    pub line: u64,
+    pub literal: Option<Literal>,
+}
+
+#[derive(Debug)]
+pub enum Literal {
+    String(String),
+    Number(f64),
+    Bool(bool),
+    Nil,
 }
 
 impl Display for Token {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{:?} {}", self.token_type, self.lexeme)
+        write!(f, "{:?} {:#?}", self.token_type, self.lexeme)
     }
 }

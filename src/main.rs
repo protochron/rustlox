@@ -1,10 +1,6 @@
 use std::fs::read;
 use std::io::BufRead;
 
-mod errors;
-mod scanner;
-mod tokens;
-
 fn main() {
     let args: Vec<String> = std::env::args().collect();
 
